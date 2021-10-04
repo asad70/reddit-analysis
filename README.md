@@ -58,5 +58,5 @@ the most mentioned ticker is heavily downvoted, but you can change that in upvot
 
 ## Acknowledgement:
 
-[Danksta](https://github.com/Danksta)
+[Danksta](https://github.com/Danksta) initial work and setup.
 
