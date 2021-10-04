@@ -56,3 +56,7 @@ It completely ignores the heavily downvoted comments, and there can be a time wh
 the most mentioned ticker is heavily downvoted, but you can change that in upvotes variable.
 
 
+## Acknowledgement:
+
+[Danksta](https://github.com/Danksta)
+
