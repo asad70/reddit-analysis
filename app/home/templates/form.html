@@ -1,0 +1,48 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Charts {% endblock %} 
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}
+
+  <link href="/static/assets/vendors/@coreui/chartjs/css/coreui-chartjs.css" rel="stylesheet">
+
+{% endblock stylesheets %}
+
+{% block content %}
+
+<main class="c-main">
+  <div class="container-fluid">
+
+      <div><input id="next" type="button" value="Next" />
+          <input id="check" type="button" value="Check" />
+      </div>
+      <div id="container"></div>
+
+      <form method="POST">
+          <textarea cols="109" name="text1" placeholder="Say Something: ...." rows="10"></textarea><br><br>
+
+
+          <input class="example_a" type="submit" value="Click!" />
+
+      </form>
+      {% if final %}
+      <div>
+          <h2>The Sentiment of</h2> '{{ result }}'
+          <p>{{final}}</p>
+          {% else %}
+          <p></p>
+          {% endif %}
+      </div>
+  </div>
+</main>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+
+  <script src="/static/assets/vendors/@coreui/chartjs/js/coreui-chartjs.bundle.js"></script>
+  <script src="/static/assets/js/charts.js"></script>
+
+{% endblock javascripts %}

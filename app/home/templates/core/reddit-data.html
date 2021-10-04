@@ -1,0 +1,38 @@
+
+{% block title %} Charts {% endblock %} 
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}
+
+  <link href="/static/assets/vendors/@coreui/chartjs/css/coreui-chartjs.css" rel="stylesheet">
+
+{% endblock stylesheets %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> 
+
+{% block content %}
+
+<main class="c-main">
+  <div class="container-fluid">
+    <div>
+        <h2>The Sentiment of</h2> '{{ result }}' 
+        <p>{{final}}</p>
+        <p>t {{t}}</p>
+        <p>c {{c}}</p>
+        <p>p {{p}}</p>
+        <p>s {{s}}</p>
+    </div>
+
+      
+  </div>
+</main>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+
+
+
+
+{% endblock javascripts %}
+

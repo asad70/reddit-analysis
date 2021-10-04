@@ -1,0 +1,82 @@
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#deletedb').click(function () {
+                $.ajax().done(function (reply) {
+                    $('#container').html("{{ delete_db() }}");
+                });
+            });
+        });
+        $(document).ready(function () {
+            $('#createdb').click(function () {
+                $.ajax().done(function (reply) {
+                    $('#container').html("{{ create_db() }}");
+                });
+            });
+        });
+        $(document).ready(function () {
+            $('#customdb').click(function () {
+                $.ajax("{{ url_for('home_blueprint.test') }}").done(function (reply) {
+                    $('#container').html(reply);
+                });
+            });
+        });
+    </script>
+</head>
+{% extends "layouts/base.html" %}
+{% block title %} Settings {% endblock %}
+
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}
+
+<link href="/static/assets/vendors/@coreui/chartjs/css/coreui-chartjs.css" rel="stylesheet">
+
+{% endblock stylesheets %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+{% block content %}
+
+<div class="container-fluid">
+
+    <div class="row align-items-center">
+        <div class="col-6 col-sm-4 col-md-2 col-xl mb-3 mb-xl-0">
+            <input id="deletedb"  class="btn btn-block btn-primary" type="button" value="Next" />
+        </div>
+        <div class="col-6 col-sm-4 col-md-2 col-xl mb-3 mb-xl-0">
+            <input id="createdb" class="btn btn-block btn-primary" type="button" value="Check" />
+        </div>
+    </div>
+    <form role="form" method="post" action="">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend"><span class="input-group-text">
+                    <svg class="c-icon">
+                        <use xlink:href="/static/assets/vendors/@coreui/icons/svg/free.svg#cil-user"></use>
+                    </svg></span></div>
+            <input type="text" id='query' name='query' class='form-control' placeholder="Enter custom query">
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <button name='submit' id='submit' onclick={{ url_for('home_blueprint.settings') }}
+                    class="btn btn-primary px-4">Submit</button>
+                <button type="submit" name="customdb" class="btn btn-primary px-4">Login</button>
+            </div>
+        </div>
+    </form>
+    <div id='container'></div>
+    {% if found %}
+    <p>found is {{ found }}</p>
+    {% endif %}
+
+</div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+
+
+
+
+{% endblock javascripts %}

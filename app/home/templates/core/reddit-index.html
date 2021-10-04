@@ -1,0 +1,218 @@
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#next').click(function () {
+                $.ajax("{{ url_for('home_blueprint.my_form_post') }}").done(function (reply) {
+                    $('#container').html(reply);
+                });
+            });
+        });
+        $(document).ready(function () {
+            $('#check').click(function () {
+                $.ajax("{{ url_for('home_blueprint.status_bar') }}").done(function (reply) {
+                    $('#container').html(reply);
+                });
+            });
+        });
+        $(document).ready(function () {
+            $('#output').click(function () {
+                $.ajax("{{ url_for('home_blueprint.output') }}").done(function (reply) {
+                    $('#container').html(reply);
+                });
+            });
+        });
+        $(document).ready(function () {
+            $('#test1').click(function () {
+                $.ajax("{{ url_for('home_blueprint.test') }}").done(function (reply) {
+                    $('#container').html(reply);
+                });
+            });
+        });
+        $(document).ready(function () {
+            $('#test2').click(function () {
+                $.ajax("{{ url_for('home_blueprint.test2') }}").done(function (reply) {
+                    $('#container').html(reply);
+                });
+            });
+        });
+    </script>
+</head>
+{% extends "layouts/base.html" %}
+
+{% block title %} Charts {% endblock %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}
+
+<link href="/static/assets/vendors/@coreui/chartjs/css/coreui-chartjs.css" rel="stylesheet">
+
+{% endblock stylesheets %}
+
+{% block content %}
+
+<main class="c-main">
+    <div class="container">
+        <h2 style="text-align: center;">Customize results</h2>
+        <h5 style="text-align: center;">(Leave empty for default values)</h5>
+        <form role="form" method="post" action="">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend"><span class="input-group-text">
+                        <svg class="c-icon">
+                            <use xlink:href="/static/assets/vendors/@coreui/icons/svg/free.svg#cil-user"></use>
+                        </svg></span></div>
+                <input type="text" id='subs' name='subs' class='form-control'
+                    placeholder="Enter subreddits separated by comma (wallstreetbets, wsb)">
+
+                <div class="input-group-prepend"><span class="input-group-text">
+                        <svg class="c-icon">
+                            <use xlink:href="/static/assets/vendors/@coreui/icons/svg/free.svg#cil-lock-locked"></use>
+                        </svg></span></div>
+                <input type="text" id='post_flairs' name='post_flairs' class='form-control'
+                    placeholder="Enter post flairs (Daily Discussion, Weekend Discussion)">
+            </div>
+
+            <div class="input-group mb-3">
+                <div class="input-group-prepend"><span class="input-group-text">
+                        <svg class="c-icon">
+                            <use xlink:href="/static/assets/vendors/@coreui/icons/svg/free.svg#cil-lock-locked"></use>
+                        </svg></span></div>
+                <input type="text" id='goodAuth' name='goodAuth' class='form-control'
+                    placeholder="Enter Authors whom comments are allowed more than once (AutoModerator)">
+                <div class="input-group-prepend"><span class="input-group-text">
+                        <svg class="c-icon">
+                            <use xlink:href="/static/assets/vendors/@coreui/icons/svg/free.svg#cil-lock-locked"></use>
+                        </svg></span></div>
+                <input type="text" id='uniqueCmt' name='uniqueCmt' class='form-control'
+                    placeholder='Allow one comment per author per symbol (true/false)'>
+            </div>
+
+
+            <div class="input-group mb-4">
+                <div class="input-group-prepend"><span class="input-group-text">
+                        <svg class="c-icon">
+                            <use xlink:href="/static/assets/vendors/@coreui/icons/svg/free.svg#cil-lock-locked"></use>
+                        </svg></span></div>
+                <input type="text" id='ignoreAuthP' name='ignoreAuthP' class='form-control'
+                    placeholder='Authors to ignore for posts '>
+                <div class="input-group-prepend"><span class="input-group-text">
+                        <svg class="c-icon">
+                            <use xlink:href="/static/assets/vendors/@coreui/icons/svg/free.svg#cil-lock-locked"></use>
+                        </svg></span></div>
+                <input type="text" id='ignoreAuthC' name='ignoreAuthC' class='form-control'
+                    placeholder='Authors to ignore for comment '>
+
+            </div>
+
+            <div class="input-group mb-4">
+                <div class="input-group-prepend"><span class="input-group-text">
+                        <svg class="c-icon">
+                            <use xlink:href="/static/assets/vendors/@coreui/icons/svg/free.svg#cil-lock-locked"></use>
+                        </svg></span></div>
+                <input type="text" id='upvoteRatio' name='upvoteRatio' class='form-control'
+                    placeholder='Upvote ratio for post to be considered, 0.70 = 70%'>
+                <div class="input-group-prepend"><span class="input-group-text">
+                        <svg class="c-icon">
+                            <use xlink:href="/static/assets/vendors/@coreui/icons/svg/free.svg#cil-lock-locked"></use>
+                        </svg></span></div>
+                <input type="text" id='ups' name='ups' class='form-control'
+                    placeholder='Define minimum number of upvotes for a post to analyze (Example: 20)'>
+
+            </div>
+
+            <div class="input-group mb-4">
+                <div class="input-group-prepend"><span class="input-group-text">
+                        <svg class="c-icon">
+                            <use xlink:href="/static/assets/vendors/@coreui/icons/svg/free.svg#cil-lock-locked"></use>
+                        </svg></span></div>
+                <input type="text" id='limit' name='limit' class='form-control'
+                    placeholder="define the limit, comments 'replace more' limit">
+                <div class="input-group-prepend"><span class="input-group-text">
+                        <svg class="c-icon">
+                            <use xlink:href="/static/assets/vendors/@coreui/icons/svg/free.svg#cil-lock-locked"></use>
+                        </svg></span></div>
+                <input type="text" id='upvotes' name='upvotes' class='form-control'
+                    placeholder='Define minimum number of upvotes for a comment to be considered'>
+
+            </div>
+
+            <div class="input-group mb-4">
+                <div class="input-group-prepend"><span class="input-group-text">
+                        <svg class="c-icon">
+                            <use xlink:href="/static/assets/vendors/@coreui/icons/svg/free.svg#cil-lock-locked"></use>
+                        </svg></span></div>
+                <input type="text" id='picks' name='picks' class='form-control'
+                    placeholder='Define number of top picks'>
+                <div class="input-group-prepend"><span class="input-group-text">
+                        <svg class="c-icon">
+                            <use xlink:href="/static/assets/vendors/@coreui/icons/svg/free.svg#cil-lock-locked"></use>
+                        </svg></span></div>
+                <input type="text" id='picks_ayz' name='picks_ayz' class='form-control'
+                    placeholder='Define number of picks for sentiment analysis'>
+            </div>
+
+
+            <div class="row">
+                <div class="col-6">
+                    <button onclick={{ url_for('home_blueprint.my_form_input') }}
+                        class="btn btn-primary px-4">Submit</button>
+                    <button type="submit" name="login" class="btn btn-primary px-4">Login</button>
+                </div>
+                <div class="col-6 text-right">
+                    <a href={{ url_for('home_blueprint.my_form_input') }} class="btn btn-link px-0">Submit</a>
+
+                </div>
+            </div>
+
+        </form>
+    </div>
+    <div class="container-fluid">
+
+        <div class="row align-items-center">
+            <div class="col-6 col-sm-4 col-md-2 col-xl mb-3 mb-xl-0">
+                <input id="next" class="btn btn-block btn-primary" type="button" value="Next" />
+            </div>
+            <div class="col-6 col-sm-4 col-md-2 col-xl mb-3 mb-xl-0">
+                <input id="check" class="btn btn-block btn-primary" type="button" value="Check" />
+            </div>
+            <div class="col-6 col-sm-4 col-md-2 col-xl mb-3 mb-xl-0">
+                <input id="output" class="btn btn-block btn-primary" type="button" value="Output" />
+            </div>
+            <div class="col-6 col-sm-4 col-md-2 col-xl mb-3 mb-xl-0">
+                <input id="test1" class="btn btn-block btn-primary" type="button" value="Test1" />
+            </div>
+            <div class="col-6 col-sm-4 col-md-2 col-xl mb-3 mb-xl-0">
+                <input id="test2" class="btn btn-block btn-primary" type="button" value="Test2" />
+            </div>
+        </div>
+    </div><br>
+    <div id="container" class="container-fluid"></div>
+    <div class="container-fluid">
+        <form method="POST">
+            <textarea cols="109" name="text1" placeholder="Say Something: ...." rows="10"></textarea><br><br>
+
+
+            <input class="example_a" type="submit" value="Click!" />
+
+        </form>
+    </div>
+    {% if final %}
+    <div>
+        <h2>The Sentiment of</h2> '{{ result }}'
+        <p>{{final}}</p>
+        {% else %}
+        <p></p>
+        {% endif %}
+    </div>
+
+</main>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+
+
+
+
+{% endblock javascripts %}
